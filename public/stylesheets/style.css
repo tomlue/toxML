@@ -1,0 +1,64 @@
+/**
+* Using layout suggestions from: http://alistapart.com/article/holygrail
+* 
+* * don't forget that borders take up some space
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #484848;
+}
+
+a {
+    cursor: hand;
+    cursor: pointer;
+}
+
+#header {
+    background-color: black;
+    color:white;
+    margin:0;
+}
+
+#container {    
+    min-width: 300px;
+    padding-left:  200px;
+    padding-right: 150px; /* right column for project navigation */        
+
+    margin: 0;
+}
+
+#container .column {
+    float: left;
+    position: relative;    
+    color: white;
+}
+
+#empty {
+    width:100%;
+}
+
+/* The main project window */
+#project {
+    width: 100%;    
+}
+
+/* Project creation and navigation left column (minimizable?) */
+#projects {
+    padding: 20px;
+    width: 200px;    
+    margin-left: -100%;
+    right: 200px;    
+}
+
+
+/* right column for viewing project outline (widget navigation)*/
+#properties {
+  width: 150px;          /* RC width */
+  margin-right: -150px;  /* RC width */
+}
+
+#footer {
+    clear: both;    
+}
