@@ -34,13 +34,12 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 var io = sio.listen(server);
 io.set('log level', 1);
-io.sockets.on('connection', function(socket){    
-	console.log('got a connection');
-
+io.sockets.on('connection', function(socket){    	
+  //When a new project is created add the project to our database
+  //emit an add_project event
   socket.on("create_project",function(project){    
     socket.emit("add_project",project);   
-  })
-  	
+  })  	
 });
 
 
