@@ -1,5 +1,5 @@
 /**
-* Javascript for adding (finding/creating) projects to your package explorer
+* Javascript for adding (finding/creating) projects to your project explorer
 * Functions
 *	projectDialog(): opens a dialog for creating projects
 *	createProject(): opens a window for creating projects, loads new project
@@ -36,8 +36,10 @@ function removeProject(name) {
 
 }
 
-function openProject(){
+function openProject(project){
+	for(widget in project.widgets){
 
+	}
 }
 
 //listen for socket messages for appending projects to the project list
