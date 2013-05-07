@@ -5,7 +5,7 @@
 var express = require('express')
   , routes = require('./routes')  
   , http = require('http')
-  , path = require('path')
+  , path = require('path')  
   , sio = require('socket.io')  
 
 var app = express();
@@ -35,7 +35,12 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 var io = sio.listen(server);
 io.set('log level', 1);
 io.sockets.on('connection', function(socket){    
-	console.log('got a connection');   	
+	console.log('got a connection');
+
+  socket.on("create_project",function(project){    
+    socket.emit("add_project",project);   
+  })
+  	
 });
 
 

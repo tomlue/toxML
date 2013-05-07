@@ -15,10 +15,17 @@ a {
     cursor: pointer;
 }
 
+/** Class for projects added to the project_list */
+.project {
+    cursor: hand;
+    cursor: pointer;    
+}
+
 #header {
     background-color: black;
     color:white;
     margin:0;
+    height:32px;
 }
 
 #container {    
@@ -40,12 +47,12 @@ a {
 }
 
 /* The main project window */
-#project {
+#project_container {
     width: 100%;    
 }
 
 /* Project creation and navigation left column (minimizable?) */
-#projects {
+#project_list {
     padding: 20px;
     width: 200px;    
     margin-left: -100%;
