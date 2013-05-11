@@ -36,10 +36,8 @@ function removeProject(name) {
 
 }
 
-function openProject(project){
-	for(widget in project.widgets){
-
-	}
+function openProject(name) {
+	socket.emit("open_project",name)
 }
 
 //listen for socket messages for appending projects to the project list
@@ -49,7 +47,16 @@ socket.on("add_project",function(project){
 	project_div.innerHTML = project.name
 	project_div.className = "project"
 
-	project_div.setAttribute("onclick","console.log('hahahaha')")
+	project_div.setAttribute("onclick","openProject('"+project.name+"');")
 	project_list.append(project_div)
 	console.log(project)
 })
+
+//listen for socket messages for opening the main project
+//this should set the outline and title of the open project
+socket.on("open_project",function(project){
+	console.log("got an open project message")
+	console.log(project)	
+})
+
+//listens for widget adding messages

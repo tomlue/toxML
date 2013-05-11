@@ -4,6 +4,7 @@
  */
 var express = require('express')
   , routes = require('./routes')  
+  , widgets = require('./widgets')
   , http = require('http')
   , path = require('path')  
   , pg = require('pg')
@@ -41,7 +42,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', routes['index']);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
@@ -51,22 +52,30 @@ var io = sio.listen(server);
 io.set('log level', 1);
 io.sockets.on('connection', function(socket){    	
   
-  //When a new project is created add the project to our database  
+  //When a new project is created add the project to our database and emit add_project
   socket.on("create_project",function(project){
-    var insertStr = "INSERT INTO projects (name) VALUES ('" + project.name + "')"
+    var insertStr = "INSERT INTO projects (name,widgets) \
+                      VALUES ('" + project.name + "','{data}')"    
+    
     client.query(insertStr, function(err,result){
       if(err) console.log(err)
+      socket.emit("add_project",project)
     })
   })
 
   //when a project is opened return the project from the db
   socket.on("open_project",function(name){
     var selectStr = "SELECT * FROM projects WHERE name = '" + name + "'"
+    
     client.query(selectStr, function(err,result){
-      var project = {name : result.name, widgets: result.widgets}
-      socket.emit("add_project",function(project))
+      console.log(result)
+      console.log(result.rows)
+      var project = {name : result[0].name, widgets: result[0].widgets}
+      console.log(project)
+      console.log("widgets:" + project.widgets)      
+
     })
   })
-
-
 });
+
+
