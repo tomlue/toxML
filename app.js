@@ -8,10 +8,9 @@ var express = require('express')
   , http = require('http')
   , path = require('path')  
   , pg = require('pg')
-  , sio = require('socket.io')  
+  , sio = require('socket.io');  
 
 var app = express();
-
 var client = new pg.Client("tcp://postgres:ashtree1@localhost:5432/toxML");
 
 console.log("connecting to postgres")
@@ -51,6 +50,9 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 var io = sio.listen(server);
 io.set('log level', 1);
 io.sockets.on('connection', function(socket){    	
+  console.log("connection!")
+
+  socket.emit("connection", {hello :"world"})
   
   //When a new project is created add the project to our database and emit add_project
   socket.on("create_project",function(project){
